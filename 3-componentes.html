@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 - Componentes</title>
+</head>
+
+<style type="text/tailwindcss">
+    @theme {
+        --text: #EBEBEB;
+        --text-secundario: #6B6B6B;
+        --primario: #462878;
+        --background: #2D2A37;
+
+        --gradient: (180deg, rgba(0, 0, 0, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%);
+
+        --gradient-houver: (180deg, rgba(0, 0, 0, 0.01) 0%, rgba(255, 255, 255, 0.05) 100%);
+
+        --sombra: 0px 11px 7px 0px rgba(0, 0, 0, 0.01), 
+         0px 7px 7px 0px rgba(0, 0, 0, 0.04), 
+         0px 4px 6px 0px rgba(0, 0, 0, 0.10), 
+         0px 2px 4px 0px rgba(0, 0, 0, 0.26), 
+         0px 0px 2px 0px rgba(0, 0, 0, 0.29), 
+         0px 2px 3px 0px rgba(255, 255, 255, 0.06) inset;
+
+         --font-sans: 'Rubik', sans-serif;
+    }
+</style>
+
+<body>
+    <div id="root"></div>
+
+    <!-- Importações React, Babel e Tailwind -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <script type="text/babel">
+        // Criação de uma variável com variantes
+        const bttVariantes = {
+            primaria: 'bg-purple-300 hover:bg-purple-400',
+            secundaria: 'bg-blue-300 hover:bg-blue-400'
+        }
+
+        // Função para criar botões reutilizáveis
+        // Caso a cor não seja passada, usa "primaria" como padrão
+        function Botoes({ cor = "primaria", children, ...props }) {
+            return (
+                <button className={`rounded cursor-pointer px-3 py-2 transition ${bttVariantes[cor]}`}>
+                    {children}
+                </button>
+            )
+        }
+
+        function ElementosPrincipais() {
+            return (
+                <>
+                    <h1 className="text-2xl font-bold">Texto</h1>
+                </>
+            )
+        }
+
+        function Inicializar() {
+            return (
+                <main className="flex gap-2 p-3">
+                    <ElementosPrincipais />
+                    {/* Aqui o botão usa a cor default ("primaria") */}
+                    <Botoes>Meu Botão</Botoes>
+                    <Botoes cor="secundaria">Outro Botão</Botoes>
+                </main>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Inicializar />)
+    </script>
+</body>
+
+</html>
